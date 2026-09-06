@@ -27,12 +27,16 @@
     <div id="lobby" class="glass-card">
       <h2>مرحباً بك! 👋</h2>
       <p class="desc">اختر شخصية صديقك ودعه يحزرها من خلال الأسئلة والتلميحات!</p>
-      
-      <div class="categories-pills">
-        <span>⚽ كرة قدم</span>
-        <span>🦊 أنمي</span>
-        <span>📹 يوتيوبرز</span>
-        <span>🎤 مغنون</span>
+
+      <!-- اختيار التصنيف -->
+      <div id="categorySelectArea" class="select-group">
+        <label for="categorySelect">اختر التصنيف للجولة:</label>
+        <select id="categorySelect" class="custom-select">
+          <option value="كرة قدم ⚽">كرة قدم ⚽</option>
+          <option value="أنمي 🦊">أنمي 🦊</option>
+          <option value="يوتيوبرز 📹">يوتيوبرز 📹</option>
+          <option value="مغنون 🎤">مغنون 🎤</option>
+        </select>
       </div>
 
       <button id="createBtn" class="btn btn-primary">
@@ -62,7 +66,7 @@
 
       <div id="chatBox" class="chat-container"></div>
 
-      <!-- مؤشر جاري الكتابة مثل مسنجر -->
+      <!-- مؤشر جاري الكتابة -->
       <div id="typingIndicator" class="typing-indicator hidden">
         <span>صديقك يكتب الآن</span>
         <div class="dots">
