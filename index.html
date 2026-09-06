@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحدي تخمين الشخصيات 🎭</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <main class="container">
+    <header class="game-header">
+      <h1 class="logo">🎭 تخمين الشخصيات</h1>
+      <p class="tagline">لعبة التحدي والذكاء بين الأصدقاء</p>
+    </header>
+
+    <div id="lobby" class="glass-card">
+      <h2>مرحباً بك! 👋</h2>
+      <p class="desc">اختر شخصية صديقك ودعه يحزرها من خلال الأسئلة والتلميحات!</p>
+      
+      <div class="categories-pills">
+        <span>⚽ كرة قدم</span>
+        <span>🦊 أنمي</span>
+        <span>📹 يوتيوبرز</span>
+        <span>🎤 مغنون</span>
+      </div>
+
+      <button id="createBtn" class="btn btn-primary">
+        <span>إنشاء غرفة جديدة</span>
+        <span class="icon">🎮</span>
+      </button>
+
+      <div id="linkArea" class="share-box hidden">
+        <p class="share-title">✨ تم إنشاء الغرفة! أرسل الرابط لصديقك:</p>
+        <div class="input-group">
+          <input type="text" id="inviteLink" readonly>
+          <button id="copyBtn" class="btn btn-secondary">نسخ 📋</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameArea" class="glass-card hidden">
+      
+      <div class="character-card">
+        <span id="categoryBadge" class="badge">التصنيف</span>
+        <p class="sub-text">شخصية صديقك (أعطه تلميحات عنها):</p>
+        <div class="avatar-wrapper">
+          <img id="opponentImg" src="" alt="صورة الشخصية">
+        </div>
+        <h2 id="opponentName" class="character-name">---</h2>
+      </div>
+
+      <div id="chatBox" class="chat-container"></div>
+
+      <!-- مؤشر جاري الكتابة مثل مسنجر -->
+      <div id="typingIndicator" class="typing-indicator hidden">
+        <span>صديقك يكتب الآن</span>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="msgInput" placeholder="اسأل سؤالاً (مثلاً: هل الشخصية حقيقية؟)...">
+        <button id="sendBtn" class="btn btn-send">إرسال 🚀</button>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
