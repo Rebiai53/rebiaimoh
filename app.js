@@ -256,11 +256,15 @@ const characterCategories = {
   ...otherCategories
 };
 
+// إضافة خوادم STUN متعددة لربط الأجهزة وتجاوز جدران الحماية
 const peerConfig = {
   config: {
     iceServers: [
       { urls: 'stun:stun.l.google.com:19302' },
-      { urls: 'stun:stun1.l.google.com:19302' }
+      { urls: 'stun:stun1.l.google.com:19302' },
+      { urls: 'stun:stun2.l.google.com:19302' },
+      { urls: 'stun:stun3.l.google.com:19302' },
+      { urls: 'stun:stun4.l.google.com:19302' }
     ]
   }
 };
@@ -331,7 +335,6 @@ function createRoom() {
     createBtn.disabled = true;
   }
 
-  // التأكد الأمني من وجود المكتبة
   if (typeof Peer === 'undefined') {
     alert("لم يتم تحميل مكتبة الاتصال (PeerJS) بنجاح، يرجى التأكد من الاتصال بالإنترنت.");
     if (createBtn) {
@@ -367,7 +370,7 @@ function createRoom() {
 
   peer.on('error', (err) => {
     console.error("PeerJS Error:", err);
-    alert('حدث خطأ أثناء الاتصال، أعد المحاولة.');
+    alert('حدث خطأ أثناء الاتصال بالخادم، أعد المحاولة.');
     if (createBtn) {
       createBtn.innerText = "إنشاء غرفة جديدة 🎮";
       createBtn.disabled = false;
@@ -385,13 +388,13 @@ function joinRoom(hostId) {
   peer = new Peer(peerConfig);
 
   peer.on('open', () => {
-    conn = peer.connect(hostId);
+    conn = peer.connect(hostId, { reliable: true });
     setupConnectionEvents();
   });
 
   peer.on('error', (err) => {
     console.error("PeerJS Connection Error:", err);
-    alert('تعذر الاتصال بصديقك، تأكد من أن الرابط صحيح أو أعد المحاولة.');
+    alert('تعذر الاتصال بصديقك، أعد المحاولة أو قم بتحديث الصفحة.');
   });
 }
 
