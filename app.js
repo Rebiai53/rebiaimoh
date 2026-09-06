@@ -215,7 +215,7 @@ footballPlayers.forEach(player => {
   player.img = generatePlayerAvatar(player.name);
 });
 
-// أصناف باقي اللعبة (أنمي، يوتيوبرز، مغنون)
+// أصناف باقي اللعبة
 const otherCategories = {
   "أنمي 🦊": [
     { id: 201, name: "ناروتو أوزوماكي", category: "أنمي 🦊", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS97hnkXIOxkVPlJZpjah1eBGRlnLYypY41D5SN3AVYzQ&s=10" },
@@ -230,18 +230,18 @@ const otherCategories = {
     { id: 210, name: "مادارا", category: "أنمي 🦊", img: "https://imgs.search.brave.com/Oit7i_Nt0aQhcezympoTIm290Djt-nqXZLohBc_0__s/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vo/cmgxWmxsTkxqTGVy/UjAxd2xZeWx3cEJF/R09iMTgzak1GcndH/d3RteXgyYnA1SkIx/ZmNXcXBYbjVQRjI0/dnpFRHFWSi1oNU5G/bnlwNjJvWl8tTFRY/N3NBWU5KcGdkY0l3/YXJvbldkc1VaSzEy/Z0piMlZwamJLSS0w/VGFOVmIwRjM3QzVO/ZVJuenRuMTNvL3Mx/NjAwL01hZGFyYStV/Y2hpaGErJTI4MSUy/OS5qcGc" },
     { id: 211, name: "ليفاي", category: "أنمي 🦊", img: "https://imgs.search.brave.com/DyBh2qXF3L7DFfWzMN-G42boSY0-TOL89eMG1HhWyCw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzI4L2Y2/L2MyLzI4ZjZjMmQ4/ZmJlYTU4ZjA1Mjhk/N2U4NDM3ZmQ3ZjVk/LmpwZw" },
     { id: 212, name: "سايتما", category: "أنمي 🦊", img: "https://imgs.search.brave.com/BsKD8dL_4jS_EZmP8TCi4jsZFNWaFq3vg3D6Xe01Dbs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2IzLzEx/L2FmL2IzMTFhZjM2/ZjA2OTcwOTU3Y2Fj/YjI2Y2I3ZmZkZWMy/LmpwZw" },
-    { id: 213, name: "كاكاشي", category: "أنمي 🦊", img: "https://imgs.search.brave.com/UTqDNrDfgTtsrwFD2lU9hZgLKHbPRp5RFxWsogIl5PQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYS9BVnZY/c0VoZkJBenY0ZmpM/ZDBtWmo0LTZyUXpx/UXVKWnBLaVpKd1NH/NldLcGZ2VmRIdW1V/X0owdGJXWkhweUlk/TEhycjUydGN4eU16/eG9NS1JPWDh6R1NR/SkVyS0pwQnl5bUFJ/aG8yakd1OExFOVFL/WFNpRHJaN3JNZUh2/dVBBdlBlZFdraVpw/azJYeVR3cFVCaDFC/YllyNmFVUE5YMFpX/QkQtcVVDNGZzc1Jj/aDhSRTU1X1BGQXdJ/bjRNUkZ5OXFBQT13/MzIwLWgyOTEtcnc" },
+    { id: 213, name: "كاكاشي", category: "أنمي 🦊", img: "https://imgs.search.brave.com/UTqDNrDfgTtsrwFD2lU9hZgLKHbPRp5RFxWsogIl5PQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYS9BVnZY/c0VoZkJBenY0ZmpM/ZDBtWmo0LTZyUXpx/UXVKWnBKaVpKd1NH/NldLcGZ2VmRIdW1V/X0owdGJXWkhweUlk/TEhycjUydGN4eU16/eG9NS1JPWDh6R1NR/SkVyS0pwQnl5bUFJ/aG8yakd1OExFOVFL/WFNpRHJaN3JNZUh2/dVBBdlBlZFdraVpw/azJYeVR3cFVCaDFC/YllyNmFVUE5YMFpX/QkQtcVVDNGZzc1Jj/aDhSRTU1X1BGQXdJ/bjRNUkZ5OXFBQT13/MzIwLWgyOTEtcnc" },
     { id: 214, name: "فيجيتا", category: "أنمي 🦊", img: "https://imgs.search.brave.com/GmeZvFqdRr1vaqAWMuj4vMOHwu0TKAlrk-1rgbBa5FI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly92c3Rh/dGljLnZpZXRuYW0u/dm4vdmlldG5hbS9y/ZXNvdXJjZS9JTUFH/RS8yMDI2LzA2LzI2/LzE3ODI0NjY4MTI1/OThfc3VwZXItc2Fp/eWFuLWJsdWUtZXZv/bHZlZC12ZWdldGEt/MTc4MjMyMTk1NTMx/MDkxNzE1NjYxMC53/ZWJw" },
-    { id: 215, name: "غون", category: "أنمي 🦊", img: "https://imgs.search.brave.com/3jJhOxnoZnHAVlK_7FXgB9AsVvuvwhDWBirjKZgEQVE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vo/LXB3ejlWZDljckE3/azhPQXVaVVNRMVlG/MHNGb1laOVpyRVdu/eUxxNGQtQjltRjJz/UHh2U2VGQ0FidWtP/U29BZjByMC1BenJO/RnhlQXA1Q2RxQWZu/eC1vNHV0VDFKYmc0/NVo5S1NsZmRxV1hr/ckNlXy1DTWdtZ0xI/Wmlpd0JYZmcwdnFR/NmNMTFBoX2lad1Jr/eFVsbURwRGpveERR/dk1oVlY0cllPTDZh/RThfNGdSVlp1WWh6/eTY5NU5KZy93MzIw/LWgzMjAtcncvMjEy/NzkyNTc1MmM5YWUz/YmRiNDhmNTk1MWY1/MTE1MzIuanBn" },
-    { id: 216, name: "اول مايت", category: "أنمي 🦊", img: "https://imgs.search.brave.com/ZjGbvhpV1ezbf0lyrBgepZJELa9PPYaPg8VqYewC9Ck/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vn/d0h2dHhpbjkweUFG/SVpfazF3SmQzemJE/REs1UzVtejRqS2kt/aVdIOVZucFItMXl6/M0J6N0Y1WTYzTHpP/MGlDalZwRmdjWmla/TGNtRERGZ2JxQi01/TTdWM2JjSWtNQXVh/WV9xcVFCdEk0elRm/UXYzeDBOMVJ5MnJ2/SlVFMmRqTDdWVUFD/QnNYY0dfdUhLL3M2/NDAvYWxsLW1pZ2h0/LW9yaWdpbnMuanBn" },
+    { id: 215, name: "غون", category: "أنمي 🦊", img: "https://imgs.search.brave.com/3jJhOxnoZnHAVlK_7FXgB9AsVvuvwhDWBirjKZgEQVE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vo/LXB3ejlWZDljckE3/azhPQXVaVVNRMVlG/MHNGb1laOVpyRVdu/eUxxNGQtQjltRjJz/UHh2U2VGQ0FidWtP/U29BZjByMC1Az3JO/RnhlQXA1Q2RxQWZu/eC1vNHV0VDFKYmc0/NVo5S1NsZmRxV1hr/ckNlXy1DTWdtZ0xI/Wmlpd0JYZmcwdnFR/NmNMTFBoX2lad1Jr/eFVsbURwRGpveERR/dk1oVlY0cllPTDZh/RThfNGdSVlp1WWh6/eTY5NU5KZy93MzIw/LWgzMjAtcncvMjEy/NzkyNTc1MmM5YWUz/YmRiNDhmNTk1MWY1/MTE1MzIuanBn" },
+    { id: 216, name: "اول مايت", category: "أنمي 🦊", img: "https://imgs.search.brave.com/ZjGbvhpV1ezbf0lyrBgepZJELa9PPYaPg8VqYewC9Ck/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vn/d0h2dHhpbjkweUFG/SVpfazF3SmQzemJE/REs1UzVtejRqS2kt/aVdIOVZucFItMXl6/M0J6N0Y1WTYzTHpP/MGlDalZwRmdjWmla/TGNtRERGZ2JxQi01/TTdWM2JjSWtNQXVh/WV_qqFCdEk0elRm/UXYzeDBOMVJ5MnJ2/SlVFMmRqTDdWVUFD/QnNYY0dfdUhLL3M2/NDAvYWxsLW1pZ2h0/LW9yaWdpbnMuanBn" },
     { id: 217, name: "ميدوريا", category: "أنمي 🦊", img: "https://imgs.search.brave.com/1J2BHqrLhHXPgyjhnx6gOrTLnInkKBuI4QCuNmiiQTk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzM3L2E2/LzVlLzM3YTY1ZTk4/YjNmNWQ5NWIwY2Fi/YThjOGM1YTllNThi/LmpwZw" },
     { id: 218, name: "غوجو ساتوروا", category: "أنمي 🦊", img: "https://imgs.search.brave.com/N1BFd35Y1ksbY6QQDoiZ19befJyXcYe87S5S74z--ls/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vp/U2JuN1lDX05yMkhy/OWZRTU9uWGtsWG5p/M3Z4RjNnWWJQdElU/U2F5azZCV1RmU1lR/LWRKSjRnb1hpZ0du/ZUhWMVVsZTBFN2Zq/aTV6OU1jTElMN2dJ/LTZOUDVJRVJGaXdQ/WmNWN1FEdnBNam5I/NGJpMEFxdDdvbDY2/U21sUDd4dkdsemhQ/aGJ1OXJtd2hNL3cz/MjAtaDMyMC1ydy9G/Ql9JTUdfMTYxMDIy/MDg3ODQxNC5qcGc" },
     { id: 219, name: "نامي", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/f4/48/4e/f4484e9946033c7d83e3443e72c99c21.jpg" },
     { id: 220, name: "جارب", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/8e/52/1b/8e521bf3116a3d5cdb4d2120d2941531.jpg" },
     { id: 221, name: "تسونادي", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/36/59/79/36597978eca73f59dc29f9507b8bfee0.jpg" },
     { id: 222, name: "جيرايا", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/46/99/2c/46992ca220a18ea8e3c4d22c00ac19b0.jpg" },
-    { id: 223, name: "باين", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/32/1d/95/321d95505a288d1f317d8ec6e7c6710b.jpg" },
-  ]
+    { id: 223, name: "باين", category: "أنمي 🦊", img: "https://i.pinimg.com/736x/32/1d/95/321d95505a288d1f317d8ec6e7c6710b.jpg" }
+  ],
   "يوتيوبرز 📹": [
     { id: 224, name: "MrBeast", category: "يوتيوبرز 📹", img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%230891b2'/><circle cx='100' cy='85' r='45' fill='%23f43f5e'/><text x='100' y='160' font-family='Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'>MRBEAST</text></svg>" },
     { id: 225, name: "أبو فلة", category: "يوتيوبرز 📹", img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%234d7c0f'/><circle cx='100' cy='85' r='45' fill='%23fef08a'/><text x='100' y='160' font-family='Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'>ABOFLAH</text></svg>" }
@@ -249,7 +249,6 @@ const otherCategories = {
   "مغنون 🎤": [
     { id: 226, name: "مايكل جاكسون", category: "مغنون 🎤", img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23111827'/><circle cx='100' cy='85' r='45' fill='%23e5e7eb'/><text x='100' y='160' font-family='Arial' font-size='20' font-weight='bold' fill='white' text-anchor='middle'>M. JACKSON</text></svg>" },
     { id: 227, name: "عمرو دياب", category: "مغنون 🎤", img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='%23854d0e'/><circle cx='100' cy='85' r='45' fill='%23fef08a'/><text x='100' y='160' font-family='Arial' font-size='20' font-weight='bold' fill='white' text-anchor='middle'>AMR DIAB</text></svg>" }
-
   ]
 };
 
@@ -270,6 +269,7 @@ const peerConfig = {
 let peer = null;
 let conn = null;
 let typingTimeout = null;
+let selectedCategoryByHost = "كرة قدم ⚽";
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('createBtn').addEventListener('click', createRoom);
@@ -294,25 +294,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const urlParams = new URLSearchParams(window.location.search);
   const hostId = urlParams.get('room');
+  const catFromUrl = urlParams.get('cat');
+
+  if (catFromUrl && characterCategories[catFromUrl]) {
+    selectedCategoryByHost = catFromUrl;
+  }
 
   if (hostId) {
     const createBtn = document.getElementById('createBtn');
     createBtn.innerText = "جاري الاتصال بصديقك... ⏳";
     createBtn.disabled = true;
+    
+    // إخفاء قائمة اختيار التصنيف لدى الزائر لأنه تم تحديده مسبقاً من الرابط
+    const catSelectArea = document.getElementById('categorySelectArea');
+    if (catSelectArea) catSelectArea.classList.add('hidden');
+
     joinRoom(hostId);
   }
 });
 
 function createRoom() {
   const createBtn = document.getElementById('createBtn');
+  const categorySelect = document.getElementById('categorySelect');
+  
+  selectedCategoryByHost = categorySelect.value;
+
   createBtn.innerText = "جاري إنشاء الغرفة... ⏳";
   createBtn.disabled = true;
+  categorySelect.disabled = true;
 
   peer = new Peer(peerConfig);
 
   peer.on('open', (id) => {
     createBtn.innerText = "في انتظار انضمام صديقك... ⏳";
-    let fullLink = window.location.origin + window.location.pathname + '?room=' + id;
+    
+    // إرفاق التصنيف المختار في الرابط
+    const fullLink = window.location.origin + window.location.pathname + 
+                     '?room=' + id + '&cat=' + encodeURIComponent(selectedCategoryByHost);
+    
     document.getElementById('inviteLink').value = fullLink;
     document.getElementById('linkArea').classList.remove('hidden');
   });
@@ -330,6 +349,7 @@ function createRoom() {
     alert('حدث خطأ بالاتصال، أعد المحاولة.');
     createBtn.innerText = "إنشاء غرفة جديدة 🎮";
     createBtn.disabled = false;
+    categorySelect.disabled = false;
   });
 }
 
@@ -348,9 +368,8 @@ function joinRoom(hostId) {
 }
 
 function setupGameAsHost() {
-  const categoryKeys = Object.keys(characterCategories);
-  const selectedCategory = categoryKeys[Math.floor(Math.random() * categoryKeys.length)];
-  const pool = characterCategories[selectedCategory];
+  // استخدام التصنيف المختار حصراً
+  const pool = characterCategories[selectedCategoryByHost] || footballPlayers;
 
   const p1Index = Math.floor(Math.random() * pool.length);
   let p2Index = Math.floor(Math.random() * pool.length);
