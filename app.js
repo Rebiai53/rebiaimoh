@@ -1,4 +1,4 @@
-// قائمة 200 لاعب كرة قدم مضافة بالكامل
+// قائمة 200 لاعب كرة قدم
 const footballPlayers = [
   { id: 1, name: "ليونيل ميسي 🇦🇷", category: "كرة قدم ⚽" , img: "https://imgs.search.brave.com/__bcZsUoRALHCu6ESo0Uvh34KZ9yUuRn-XFcSJl5NTI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9saW9u/ZWwtbWVzc2ktZWcu/Y29tL3N0b3JhZ2Uv/MjAyNC8wOC9MaW9u/ZWwtTWVzc2kuLTEt/MS5wbmc" },
   { id: 2, name: "كريستيانو رونالدو 🇵🇹", category: "كرة قدم ⚽" , img: "https://imgs.search.brave.com/cJUjyN_0i8PbS8M23kUu_vywp7QSUWodWSQc-8K3fR4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wYXJz/cG5nLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8xMC9D/cmlzdGlhbm8tUm9u/YWxkb3BuZy5wYXJz/cG5nLmNvbS0xMC0z/MDB4MzAwLnBuZw" },
@@ -202,7 +202,6 @@ const footballPlayers = [
   { id: 200, name: "مايكل إيسيان 🇬🇭", category: "كرة قدم ⚽" }
 ];
 
-// دالة لإنشاء صورة SVG تلقائية تحتوي على أول حرفين من اسم اللاعب
 function generatePlayerAvatar(name) {
   const cleanName = name.replace(/[\u1F600-\u1F6FF\u1F300-\u1F5FF\u1F680-\u1F6FF\u1F1E0-\u1F1FF]/g, '').trim();
   const initials = cleanName.substring(0, 2);
@@ -210,12 +209,12 @@ function generatePlayerAvatar(name) {
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
 
-// إضافة الصورة المولدة لكل لاعب
 footballPlayers.forEach(player => {
-  player.img = generatePlayerAvatar(player.name);
+  if(!player.img) {
+    player.img = generatePlayerAvatar(player.name);
+  }
 });
 
-// أصناف باقي اللعبة
 const otherCategories = {
   "أنمي 🦊": [
     { id: 201, name: "ناروتو أوزوماكي", category: "أنمي 🦊", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS97hnkXIOxkVPlJZpjah1eBGRlnLYypY41D5SN3AVYzQ&s=10" },
@@ -272,25 +271,30 @@ let typingTimeout = null;
 let selectedCategoryByHost = "كرة قدم ⚽";
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('createBtn').addEventListener('click', createRoom);
-  document.getElementById('copyBtn').addEventListener('click', copyLink);
-  document.getElementById('sendBtn').addEventListener('click', sendMsg);
-  
+  const createBtn = document.getElementById('createBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const sendBtn = document.getElementById('sendBtn');
   const msgInput = document.getElementById('msgInput');
-  
-  msgInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMsg();
-  });
 
-  msgInput.addEventListener('input', () => {
-    if (conn) {
-      conn.send({ type: 'typing', isTyping: true });
-      clearTimeout(typingTimeout);
-      typingTimeout = setTimeout(() => {
-        conn.send({ type: 'typing', isTyping: false });
-      }, 2000);
-    }
-  });
+  if (createBtn) createBtn.addEventListener('click', createRoom);
+  if (copyBtn) copyBtn.addEventListener('click', copyLink);
+  if (sendBtn) sendBtn.addEventListener('click', sendMsg);
+
+  if (msgInput) {
+    msgInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMsg();
+    });
+
+    msgInput.addEventListener('input', () => {
+      if (conn) {
+        conn.send({ type: 'typing', isTyping: true });
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+          conn.send({ type: 'typing', isTyping: false });
+        }, 2000);
+      }
+    });
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const hostId = urlParams.get('room');
@@ -301,11 +305,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (hostId) {
-    const createBtn = document.getElementById('createBtn');
-    createBtn.innerText = "جاري الاتصال بصديقك... ⏳";
-    createBtn.disabled = true;
+    if (createBtn) {
+      createBtn.innerText = "جاري الاتصال بصديقك... ⏳";
+      createBtn.disabled = true;
+    }
     
-    // إخفاء قائمة اختيار التصنيف لدى الزائر لأنه تم تحديده مسبقاً من الرابط
     const catSelectArea = document.getElementById('categorySelectArea');
     if (catSelectArea) catSelectArea.classList.add('hidden');
 
@@ -317,23 +321,40 @@ function createRoom() {
   const createBtn = document.getElementById('createBtn');
   const categorySelect = document.getElementById('categorySelect');
   
-  selectedCategoryByHost = categorySelect.value;
+  if (categorySelect) {
+    selectedCategoryByHost = categorySelect.value;
+    categorySelect.disabled = true;
+  }
 
-  createBtn.innerText = "جاري إنشاء الغرفة... ⏳";
-  createBtn.disabled = true;
-  categorySelect.disabled = true;
+  if (createBtn) {
+    createBtn.innerText = "جاري إنشاء الغرفة... ⏳";
+    createBtn.disabled = true;
+  }
+
+  // التأكد الأمني من وجود المكتبة
+  if (typeof Peer === 'undefined') {
+    alert("لم يتم تحميل مكتبة الاتصال (PeerJS) بنجاح، يرجى التأكد من الاتصال بالإنترنت.");
+    if (createBtn) {
+      createBtn.innerText = "إنشاء غرفة جديدة 🎮";
+      createBtn.disabled = false;
+    }
+    if (categorySelect) categorySelect.disabled = false;
+    return;
+  }
 
   peer = new Peer(peerConfig);
 
   peer.on('open', (id) => {
-    createBtn.innerText = "في انتظار انضمام صديقك... ⏳";
+    if (createBtn) createBtn.innerText = "في انتظار انضمام صديقك... ⏳";
     
-    // إرفاق التصنيف المختار في الرابط
     const fullLink = window.location.origin + window.location.pathname + 
                      '?room=' + id + '&cat=' + encodeURIComponent(selectedCategoryByHost);
     
-    document.getElementById('inviteLink').value = fullLink;
-    document.getElementById('linkArea').classList.remove('hidden');
+    const inviteLink = document.getElementById('inviteLink');
+    const linkArea = document.getElementById('linkArea');
+    
+    if (inviteLink) inviteLink.value = fullLink;
+    if (linkArea) linkArea.classList.remove('hidden');
   });
 
   peer.on('connection', (connection) => {
@@ -345,15 +366,22 @@ function createRoom() {
   });
 
   peer.on('error', (err) => {
-    console.error(err);
-    alert('حدث خطأ بالاتصال، أعد المحاولة.');
-    createBtn.innerText = "إنشاء غرفة جديدة 🎮";
-    createBtn.disabled = false;
-    categorySelect.disabled = false;
+    console.error("PeerJS Error:", err);
+    alert('حدث خطأ أثناء الاتصال، أعد المحاولة.');
+    if (createBtn) {
+      createBtn.innerText = "إنشاء غرفة جديدة 🎮";
+      createBtn.disabled = false;
+    }
+    if (categorySelect) categorySelect.disabled = false;
   });
 }
 
 function joinRoom(hostId) {
+  if (typeof Peer === 'undefined') {
+    alert("تعذر تحميل مكتبة الاتصال (PeerJS).");
+    return;
+  }
+
   peer = new Peer(peerConfig);
 
   peer.on('open', () => {
@@ -362,13 +390,12 @@ function joinRoom(hostId) {
   });
 
   peer.on('error', (err) => {
-    console.error(err);
+    console.error("PeerJS Connection Error:", err);
     alert('تعذر الاتصال بصديقك، تأكد من أن الرابط صحيح أو أعد المحاولة.');
   });
 }
 
 function setupGameAsHost() {
-  // استخدام التصنيف المختار حصراً
   const pool = characterCategories[selectedCategoryByHost] || footballPlayers;
 
   const p1Index = Math.floor(Math.random() * pool.length);
@@ -395,40 +422,56 @@ function setupConnectionEvents() {
     if (data.type === 'start') {
       startGameUI(data.hostChar);
     } else if (data.type === 'chat') {
-      document.getElementById('typingIndicator').classList.add('hidden');
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) typingIndicator.classList.add('hidden');
       addMessage(data.msg, 'opponent');
     } else if (data.type === 'typing') {
       const typingElem = document.getElementById('typingIndicator');
-      if (data.isTyping) {
-        typingElem.classList.remove('hidden');
-      } else {
-        typingElem.classList.add('hidden');
+      if (typingElem) {
+        if (data.isTyping) {
+          typingElem.classList.remove('hidden');
+        } else {
+          typingElem.classList.add('hidden');
+        }
       }
     }
   });
 }
 
 function startGameUI(charForOpponent) {
-  document.getElementById('lobby').classList.add('hidden');
-  document.getElementById('gameArea').classList.remove('hidden');
+  const lobby = document.getElementById('lobby');
+  const gameArea = document.getElementById('gameArea');
+  
+  if (lobby) lobby.classList.add('hidden');
+  if (gameArea) gameArea.classList.remove('hidden');
 
-  document.getElementById('categoryBadge').innerText = charForOpponent.category;
-  document.getElementById('opponentImg').src = charForOpponent.img;
-  document.getElementById('opponentName').innerText = charForOpponent.name;
+  const categoryBadge = document.getElementById('categoryBadge');
+  const opponentImg = document.getElementById('opponentImg');
+  const opponentName = document.getElementById('opponentName');
+
+  if (categoryBadge) categoryBadge.innerText = charForOpponent.category;
+  if (opponentImg) opponentImg.src = charForOpponent.img;
+  if (opponentName) opponentName.innerText = charForOpponent.name;
 
   const chatBox = document.getElementById('chatBox');
-  chatBox.innerHTML = '<div class="msg system">✨ تم الاتصال بنجاح! التصنيف المختار لهذه الجولة: (' + charForOpponent.category + ').</div>';
+  if (chatBox) {
+    chatBox.innerHTML = '<div class="msg system">✨ تم الاتصال بنجاح! التصنيف المختار لهذه الجولة: (' + charForOpponent.category + ').</div>';
+  }
 }
 
 function copyLink() {
   const linkInput = document.getElementById('inviteLink');
-  linkInput.select();
-  navigator.clipboard.writeText(linkInput.value);
-  alert('تم نسخ الرابط! أرسله لصديقك الآن.');
+  if (linkInput) {
+    linkInput.select();
+    navigator.clipboard.writeText(linkInput.value);
+    alert('تم نسخ الرابط! أرسله لصديقك الآن.');
+  }
 }
 
 function sendMsg() {
   const input = document.getElementById('msgInput');
+  if (!input) return;
+
   const msg = input.value.trim();
 
   if (msg && conn) {
@@ -441,6 +484,8 @@ function sendMsg() {
 
 function addMessage(msg, sender) {
   const chatBox = document.getElementById('chatBox');
+  if (!chatBox) return;
+
   const msgElement = document.createElement('div');
   msgElement.classList.add('msg', sender);
   msgElement.innerHTML = '<b>' + (sender === 'me' ? 'أنت' : 'صديقك') + ':</b> ' + msg;
